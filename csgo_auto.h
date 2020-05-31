@@ -9,7 +9,6 @@ public:
     auto_accepter(const auto_accepter&) = delete;
     auto_accepter(auto_accepter&&) = delete;
 
-    void SendMessageViaScript(); //Runs python script which send notification to user
     auto_accepter& operator=(const auto_accepter&) = delete;
     auto_accepter& operator=(auto_accepter&&) = delete;
 
@@ -30,6 +29,7 @@ private:
     void GetCursorPosition(DWORD&, DWORD&); //get cursor coordinates 
     void SimMouseClick(); //simulates mouse click
     void GetUserId(); //Retrieves user id from file if it exists
+    void SendMessageViaScript(); //Runs python script which send notification to user
 
     bool CheckIfButtonReady(); //Checks is button ready or not
 };
