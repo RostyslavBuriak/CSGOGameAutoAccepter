@@ -1,5 +1,6 @@
 #include "csgo_auto.h"
 #include <iostream>
+#include <fstream>
 
 void auto_accepter::GetWindowResolution() {
     window_width = GetSystemMetrics(SM_CXSCREEN);
@@ -45,6 +46,9 @@ void auto_accepter::GetCursorPosition(DWORD& posx, DWORD& posy) {
 
 
 void auto_accepter::Start() {
+
+    GetUserId();
+
     while (true) {
         Sleep(1000);
         GetWindowResolution();
@@ -61,7 +65,8 @@ void auto_accepter::Start() {
 
             SetCursorPos(cpos_x, cpos_y); //third set cursor position to previous coordinates
 
-            break;
+            SendMessageViaScript(); //notify user via telegram 
+
         }
     }
 }
@@ -78,4 +83,38 @@ bool auto_accepter::CheckIfButtonReady() {
     ReleaseDC(NULL, dc);
 
     return 0;
+}
+
+
+void auto_accepter::GetUserId() {
+    std::ifstream user_id_file; //file which contains user id
+    
+    user_id_file.open("config.txt"); 
+
+    if (user_id_file.fail()) {
+        std::ofstream createfile("config.txt"); //if file does not exist create it
+        std::cout << "\nNo user id was found, enter your user id ot '0' to proceed without user id :\n";
+
+        std::cin >> user_id;
+
+        if (user_id) //if user_id is greater than 0
+            createfile << user_id;
+
+        createfile.close();
+    }
+    else{
+        user_id_file >> user_id;
+    }
+
+    user_id_file.close();
+}
+
+
+void auto_accepter::SendMessageViaScript() {
+    std::string command = "py .\\notifsender.py "; //create command line command to run .py script
+    command += bot_api_key + " ";
+    command += std::to_string(user_id);
+
+    system("py -m pip install pyTelegramBotAPI"); //install telegram API
+    system(command.c_str()); //run .py script
 }
