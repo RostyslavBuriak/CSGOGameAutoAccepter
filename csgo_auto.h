@@ -17,7 +17,7 @@ public:
 private:
     const DWORD needed_button_colour = 6212442; //green colour indicates that the game is ready to be accepted
 
-    const std::string bot_api_key = "1214313916:AAFbt1Gg5W-BDblS7q8HdYQkgNDplfm_d-Y";
+    const std::string bot_api_key = ""; //telegram bot api key
 
     DWORD button_width = 513, button_height = 414; //513,414 is ONLY for 1024x768
     DWORD window_width = 0, window_height = 0;
