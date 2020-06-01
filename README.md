@@ -11,6 +11,9 @@ If you want to receive notifications from telegram bot you have to download noti
 Then pass your ID to programm during first run or to config file which is located in your programm's directory.
 
 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
 Программа создана для того чтобы автоматически принимать игру в CS:GO.
 
 Для того чтобы бот смог Вам прислать уведомление о том что игра была найдена скачайте notifsender.py и напишите команду /start этому боту - t.me/csgo_accepter_bot .
